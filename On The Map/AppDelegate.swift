@@ -13,9 +13,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    var signedInUser: Dictionary<String, AnyObject>?
+
+    func signedInUserId() -> String {
+        return signedInUser?["user"]!["key"] as! String
+    }
+
+    func signedInUserFirstName() -> String {
+        return signedInUser?["user"]!["first_name"] as! String
+    }
+
+    func signedInUserLastName() -> String {
+        return signedInUser?["user"]!["last_name"] as! String
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        let story = UIStoryboard(name: "LoginViewController", bundle: NSBundle.mainBundle())
+        let nav = story.instantiateViewControllerWithIdentifier("LoginViewController")
+
+        self.window?.rootViewController = nav
+        self.window?.makeKeyAndVisible()
+
         return true
     }
 
