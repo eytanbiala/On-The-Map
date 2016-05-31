@@ -46,6 +46,7 @@ class TabViewController: UITabBarController, UITabBarControllerDelegate, InfoPos
         UdacityClient.getStudentLocations { (error, result) -> (Void) in
 
             if let results = result!["results"] as? NSArray {
+                Model.sharedInstance.studentLocations = results as? Array<Dictionary<String, AnyObject>>
                 self.mapView.setResults(results)
                 self.listView.setResults(results)
             }
@@ -55,6 +56,7 @@ class TabViewController: UITabBarController, UITabBarControllerDelegate, InfoPos
     func logout() {
         self.view.alpha = 0.5
         UdacityClient.logout { (error, result) -> (Void) in
+            Model.sharedInstance.signedInUser = nil
             self.view.alpha = 1.0
             self.dismissViewControllerAnimated(true, completion: nil)
         }

@@ -54,9 +54,23 @@ class LoginViewController : UIViewController, UITextFieldDelegate {
                 alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
             } else {
-                print("Logged in")
-                let nav = UINavigationController(rootViewController: TabViewController())
-                self.presentViewController(nav, animated: true, completion: nil)
+                let code = result!["status"]
+                if (code != nil && code?.integerValue == 403) {
+                    let message = result!["error"] as! String
+                    let alert = UIAlertController(title: "Login error", message: message, preferredStyle: .Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    return;
+                }
+                print("Logged in, getting user info")
+
+                let userId = result!["account"]!["key"] as! String
+
+                UdacityClient.getUserData(userId, completion: { (error, result) -> (Void) in
+                    Model.sharedInstance.signedInUser = result
+                    let nav = UINavigationController(rootViewController: TabViewController())
+                    self.presentViewController(nav, animated: true, completion: nil)
+                })
             }
         }
     }

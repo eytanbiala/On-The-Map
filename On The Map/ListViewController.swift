@@ -13,6 +13,14 @@ struct User {
     let first: String
     let last: String
     let url: String
+    let location: String
+
+    init(dictionary: Dictionary<String, AnyObject>) {
+        first = dictionary["firstName"] as! String
+        last = dictionary["lastName"] as! String
+        url = dictionary["mediaURL"] as! String
+        location = dictionary["mapString"] as! String
+    }
 
     func full() -> String {
         return "\(first) \(last)"
@@ -50,12 +58,7 @@ class ListViewController : UITableViewController {
         contents.removeAll()
 
         for dictionary in results {
-
-            let first = dictionary["firstName"] as! String
-            let last = dictionary["lastName"] as! String
-            let mediaURL = dictionary["mediaURL"] as! String
-
-            contents.append(User(first: first, last: last, url: mediaURL))
+            contents.append(User(dictionary: dictionary as! Dictionary<String, AnyObject>))
         }
     }
 

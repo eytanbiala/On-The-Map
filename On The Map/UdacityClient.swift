@@ -15,7 +15,6 @@ typealias UdacityClientResult = (error: NSError?, result: Dictionary<String, Any
 class UdacityClient : NSObject {
 
     class func jsonFromResponseData(data: NSData) -> Dictionary<String, AnyObject>? {
-        // print(NSString(data: data, encoding: NSUTF8StringEncoding))
         do {
             let jsonObject = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0))
             return jsonObject as? Dictionary<String, AnyObject>
@@ -119,7 +118,6 @@ class UdacityClient : NSObject {
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//        request.HTTPBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"John\", \"lastName\": \"Doe\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.386052, \"longitude\": -122.083851}".dataUsingEncoding(NSUTF8StringEncoding)
 
         let bodyDict = ["uniqueKey": "\(userId)",
                         "firstName": "\(firstName)",

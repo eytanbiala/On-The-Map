@@ -120,7 +120,7 @@ class InfoPostingViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-    
+
     func submitURL(text: String) {
         locationURL = text
         if let mark = locationPlacemark, location = locationText, url = locationURL {
@@ -129,10 +129,9 @@ class InfoPostingViewController: UIViewController, UITextFieldDelegate {
 
             view.alpha = 0.95
 
-            let app = (UIApplication.sharedApplication().delegate as! AppDelegate)
-            let userId = app.signedInUserId()
-            let first = app.signedInUserFirstName()
-            let last = app.signedInUserLastName()
+            let userId = Model.sharedInstance.signedInUserId()
+            let first = Model.sharedInstance.signedInUserFirstName()
+            let last = Model.sharedInstance.signedInUserLastName()
 
             UdacityClient.addStudentLocation(userId, firstName: first, lastName: last, mapString: location, url: url, latitude: (mark.location?.coordinate.latitude)!, longitude: (mark.location?.coordinate.longitude)!, completion: { (error, result) -> (Void) in
 
@@ -148,12 +147,12 @@ class InfoPostingViewController: UIViewController, UITextFieldDelegate {
                     return
                 }
 
-
+                
                 let objectId = response["objectId"]
                 print("Created location \(objectId)")
-
+                
                 self.delegate?.didAddLocation(self)
-
+                
                 self.dismissViewControllerAnimated(true, completion: nil)
             })
         }

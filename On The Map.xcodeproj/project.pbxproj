@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9B1E4CC81CF28ABF00ED2E73 /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B1E4CC71CF28ABF00ED2E73 /* LoginViewController.storyboard */; };
 		9B1E4CCA1CF2A63800ED2E73 /* InfoPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1E4CC91CF2A63800ED2E73 /* InfoPostingViewController.swift */; };
+		9B2718FA1CFD3064007AD17C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2718F91CFD3064007AD17C /* Model.swift */; };
 		9BC4E4721CD05CAB004300DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC4E4711CD05CAB004300DC /* AppDelegate.swift */; };
 		9BC4E4741CD05CAB004300DC /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC4E4731CD05CAB004300DC /* TabViewController.swift */; };
 		9BC4E4791CD05CAB004300DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BC4E4781CD05CAB004300DC /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		9B1E4CC71CF28ABF00ED2E73 /* LoginViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginViewController.storyboard; sourceTree = "<group>"; };
 		9B1E4CC91CF2A63800ED2E73 /* InfoPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoPostingViewController.swift; sourceTree = "<group>"; };
+		9B2718F91CFD3064007AD17C /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		9BC4E46E1CD05CAB004300DC /* On The Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On The Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BC4E4711CD05CAB004300DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9BC4E4731CD05CAB004300DC /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				9BC4E4871CD073B1004300DC /* UdacityClient.swift */,
 				9BC4E48B1CD09AF5004300DC /* LoginViewController.swift */,
 				9B1E4CC91CF2A63800ED2E73 /* InfoPostingViewController.swift */,
+				9B2718F91CFD3064007AD17C /* Model.swift */,
 			);
 			path = "On The Map";
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 				9BC4E4861CD05E03004300DC /* ListViewController.swift in Sources */,
 				9B1E4CCA1CF2A63800ED2E73 /* InfoPostingViewController.swift in Sources */,
 				9BC4E4721CD05CAB004300DC /* AppDelegate.swift in Sources */,
+				9B2718FA1CFD3064007AD17C /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
