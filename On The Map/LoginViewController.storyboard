@@ -125,8 +125,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JPc-JK-7JK">
-                                        <rect key="frame" x="245" y="133" width="111" height="30"/>
-                                        <state key="normal" title="Find on the map"/>
+                                        <rect key="frame" x="238" y="133" width="124" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="124" id="DLU-Ny-iO0"/>
+                                        </constraints>
                                         <connections>
                                             <action selector="submitPressed:" destination="EGx-t5-h3D" eventType="touchUpInside" id="DCN-19-XpH"/>
                                         </connections>
@@ -136,6 +138,9 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="WX5-ys-Jom">
+                                        <rect key="frame" x="290" y="167" width="20" height="20"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -147,6 +152,7 @@
                                     <constraint firstItem="8b1-I6-F2h" firstAttribute="leading" secondItem="iex-PY-Iej" secondAttribute="leading" constant="8" id="Vc7-LE-14h"/>
                                     <constraint firstItem="wDe-BE-TpF" firstAttribute="top" secondItem="8b1-I6-F2h" secondAttribute="bottom" constant="8" id="Ysf-rZ-TJs"/>
                                     <constraint firstItem="wDe-BE-TpF" firstAttribute="leading" secondItem="iex-PY-Iej" secondAttribute="leading" constant="24" id="hZY-9U-8wJ"/>
+                                    <constraint firstItem="WX5-ys-Jom" firstAttribute="top" secondItem="JPc-JK-7JK" secondAttribute="bottom" constant="4" id="kYX-fb-W2e"/>
                                     <constraint firstItem="8b1-I6-F2h" firstAttribute="top" secondItem="iex-PY-Iej" secondAttribute="top" constant="24" id="kmF-56-Cmt"/>
                                 </constraints>
                                 <variation key="default">
@@ -161,13 +167,16 @@
                             <constraint firstItem="iex-PY-Iej" firstAttribute="top" secondItem="0Lw-vG-7fl" secondAttribute="topMargin" constant="44" id="2mF-yn-eRI"/>
                             <constraint firstItem="iex-PY-Iej" firstAttribute="leading" secondItem="0Lw-vG-7fl" secondAttribute="leadingMargin" constant="-20" id="Dvb-Iw-BW3"/>
                             <constraint firstItem="fwY-Jg-heH" firstAttribute="top" secondItem="DYL-Qu-aX9" secondAttribute="bottom" id="L6o-dc-mPW"/>
+                            <constraint firstItem="WX5-ys-Jom" firstAttribute="centerX" secondItem="0Lw-vG-7fl" secondAttribute="centerX" id="MuG-Ow-0wd"/>
                             <constraint firstItem="DYL-Qu-aX9" firstAttribute="centerX" secondItem="0Lw-vG-7fl" secondAttribute="centerX" id="d91-Tm-jCY"/>
+                            <constraint firstItem="fwY-Jg-heH" firstAttribute="top" secondItem="WX5-ys-Jom" secondAttribute="bottom" constant="369" id="eKt-xB-Qxt"/>
                             <constraint firstAttribute="trailingMargin" secondItem="iex-PY-Iej" secondAttribute="trailing" constant="-20" id="p5G-x8-Vno"/>
                             <constraint firstItem="DYL-Qu-aX9" firstAttribute="width" secondItem="0Lw-vG-7fl" secondAttribute="width" id="qR0-r1-mm0"/>
                             <constraint firstItem="DYL-Qu-aX9" firstAttribute="top" secondItem="iex-PY-Iej" secondAttribute="bottom" constant="12" id="qSv-PE-HRc"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="loadingIndicator" destination="WX5-ys-Jom" id="5fc-Fh-Z9s"/>
                         <outlet property="mapView" destination="DYL-Qu-aX9" id="jR9-ID-BYv"/>
                         <outlet property="submitButton" destination="JPc-JK-7JK" id="urA-5B-v4z"/>
                         <outlet property="textfield" destination="wDe-BE-TpF" id="stQ-rB-mxg"/>

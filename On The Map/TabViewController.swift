@@ -44,11 +44,15 @@ class TabViewController: UITabBarController, UITabBarControllerDelegate, InfoPos
 
     func loadLocations() {
         UdacityClient.getStudentLocations { (error, result) -> (Void) in
-
-            if let results = result!["results"] as? NSArray {
-                Model.sharedInstance.studentLocations = results as? Array<Dictionary<String, AnyObject>>
-                self.mapView.setResults(results)
-                self.listView.setResults(results)
+            if result != nil {
+                let results = result?["results"]
+                Model.sharedInstance.setStudentLocations(results as! Array<Dictionary<String, AnyObject>>)
+                self.mapView.reload()
+                self.listView.reload()
+            } else {
+                let alert = UIAlertController(title: "Error", message: "Could not get student locations", preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
             }
         }
     }

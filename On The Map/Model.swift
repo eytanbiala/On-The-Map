@@ -11,8 +11,15 @@ import Foundation
 class Model {
     static let sharedInstance = Model()
 
-    var studentLocations : Array<Dictionary<String, AnyObject>>?
+    var studentLocations : Array<User>?
     var signedInUser: Dictionary<String, AnyObject>?
+
+    func setStudentLocations(results: Array<Dictionary<String, AnyObject>>) {
+        studentLocations = []
+        for dictionary in results {
+            studentLocations?.append(User(dictionary: dictionary))
+        }
+    }
 
     func signedInUserId() -> String {
         return signedInUser?["user"]!["key"] as! String

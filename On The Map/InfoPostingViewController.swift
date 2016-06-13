@@ -22,6 +22,7 @@ class InfoPostingViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var textfield: UITextField!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
 
     var isSettingLocation = true
 
@@ -38,6 +39,8 @@ class InfoPostingViewController: UIViewController, UITextFieldDelegate {
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(cancel))
 
+        loadingIndicator.alpha = 0.0
+
         textfield.delegate = self
 
         configureTextfield()
@@ -47,11 +50,11 @@ class InfoPostingViewController: UIViewController, UITextFieldDelegate {
         textfield.text = nil
         if isSettingLocation {
             titleLabel.text = "Where are you studying today?"
-            submitButton.titleLabel?.text = "Find on the map"
+            submitButton.setTitle("Find on the map", forState: .Normal)
             textfield.keyboardType = .Default;
         } else {
             titleLabel.text = "URL"
-            submitButton.titleLabel?.text = "Submit"
+            submitButton.setTitle("Submit", forState: .Normal)
             textfield.keyboardType = .URL;
         }
     }
@@ -93,11 +96,17 @@ class InfoPostingViewController: UIViewController, UITextFieldDelegate {
 
     func forwardGeocode(text: String) {
         locationText = text
+
+        loadingIndicator.alpha = 1.0
+
         let request = MKLocalSearchRequest()
         request.naturalLanguageQuery = text
 
         let search = MKLocalSearch(request: request)
         search.startWithCompletionHandler { (response, error) in
+
+            self.loadingIndicator.alpha = 0.0
+
             guard let response = response else {
                 print("Search error: \(error)")
                 let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .Alert)
@@ -105,8 +114,6 @@ class InfoPostingViewController: UIViewController, UITextFieldDelegate {
                 self.presentViewController(alert, animated: true, completion: nil)
                 return
             }
-
-            // print(response)
 
             if let item = response.mapItems.first {
                 self.mapView.removeAnnotations(self.mapView.annotations)
@@ -128,12 +135,15 @@ class InfoPostingViewController: UIViewController, UITextFieldDelegate {
             submitButton.enabled = false
 
             view.alpha = 0.95
+            loadingIndicator.alpha = 1.0
 
             let userId = Model.sharedInstance.signedInUserId()
             let first = Model.sharedInstance.signedInUserFirstName()
             let last = Model.sharedInstance.signedInUserLastName()
 
             UdacityClient.addStudentLocation(userId, firstName: first, lastName: last, mapString: location, url: url, latitude: (mark.location?.coordinate.latitude)!, longitude: (mark.location?.coordinate.longitude)!, completion: { (error, result) -> (Void) in
+
+                self.loadingIndicator.alpha = 0.0
 
                 self.textfield.enabled = true
                 self.submitButton.enabled = true

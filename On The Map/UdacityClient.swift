@@ -33,7 +33,9 @@ class UdacityClient : NSObject {
         let task = session.dataTaskWithRequest(request) { data, response, error in
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             guard error == nil else {
-                completion?(error: error, result: nil)
+                dispatch_async(dispatch_get_main_queue(), {
+                    completion?(error: error, result: nil)
+                })
                 return
             }
 
@@ -51,7 +53,9 @@ class UdacityClient : NSObject {
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             guard error == nil else {
-                completion?(error: error, result: nil)
+                dispatch_async(dispatch_get_main_queue(), {
+                    completion?(error: error, result: nil)
+                })
                 return
             }
 
@@ -75,7 +79,9 @@ class UdacityClient : NSObject {
         do {
             request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(bodyDict, options: NSJSONWritingOptions.init(rawValue: 0))
         } catch let jsonError as NSError {
-            completion?(error: jsonError, result: nil)
+            dispatch_async(dispatch_get_main_queue(), {
+                completion?(error: jsonError, result: nil)
+            })
             return
         }
 
@@ -104,7 +110,7 @@ class UdacityClient : NSObject {
     }
 
     class func getStudentLocations(completion: UdacityClientResult?) {
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation?limit=100&order=updatedAt")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation?limit=100&order=-updatedAt")!)
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
 
@@ -130,7 +136,9 @@ class UdacityClient : NSObject {
         do {
             request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(bodyDict, options: NSJSONWritingOptions.init(rawValue: 0))
         } catch let jsonError as NSError {
-            completion?(error: jsonError, result: nil)
+            dispatch_async(dispatch_get_main_queue(), {
+                completion?(error: jsonError, result: nil)
+            })
             return
         }
         

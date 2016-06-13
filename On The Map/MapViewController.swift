@@ -29,15 +29,13 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         view.addSubview(mapView)
     }
 
-    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
-        NSLog("Selected annotation: \(view)")
+    func reload() {
+        if let locations = Model.sharedInstance.studentLocations {
+            addAnnotations(locations)
+        }
     }
 
-    func setResults(results: NSArray) {
-        addAnnotations(results as! [Dictionary<String, AnyObject>])
-    }
-
-    func addAnnotations(locations: [Dictionary<String, AnyObject>]) {
+    func addAnnotations(locations: [User]) {
         // We will create an MKPointAnnotation for each dictionary in "locations". The
         // point annotations will be stored in this array, and then provided to the map view.
         var annotations = [MKPointAnnotation]()
@@ -46,25 +44,12 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         // to create map annotations. This would be more stylish if the dictionaries were being
         // used to create custom structs. Perhaps StudentLocation structs.
 
-        for dictionary in locations {
-
-            // Notice that the float values are being used to create CLLocationDegree values.
-            // This is a version of the Double type.
-            let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
-            let long = CLLocationDegrees(dictionary["longitude"] as! Double)
-
-            // The lat and long are used to create a CLLocationCoordinates2D instance.
-            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-
-            let first = dictionary["firstName"] as! String
-            let last = dictionary["lastName"] as! String
-            let mediaURL = dictionary["mediaURL"] as! String
-
+        for user in locations {
             // Here we create the annotation and set its coordiate, title, and subtitle properties
             let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinate
-            annotation.title = "\(first) \(last)"
-            annotation.subtitle = mediaURL
+            annotation.coordinate = user.coordinate
+            annotation.title = "\(user.first) \(user.last)"
+            annotation.subtitle = user.url
 
             // Finally we place the annotation in an array of annotations.
             annotations.append(annotation)
