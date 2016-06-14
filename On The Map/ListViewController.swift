@@ -36,7 +36,10 @@ class ListViewController : UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (Model.sharedInstance.studentLocations?.count)!
+        if let locations = Model.sharedInstance.studentLocations {
+            return locations.count
+        }
+        return 0
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
